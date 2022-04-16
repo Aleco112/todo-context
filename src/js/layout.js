@@ -9,8 +9,8 @@ const Layout = () => {
 	
 	return (
 		<div>
-			<navbar/>
-			<home/>
+			<Navbar/>
+			<Home/>
 			<Footer/>
 			
 		</div>

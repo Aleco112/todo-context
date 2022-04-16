@@ -14,7 +14,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 			
 			
 				.then((response) => response.json())
-				.then((result) => setTodoList(result))
+				.then((result) => setStore({ list:result}))
 				.catch((error) => console.log("error", error));
 			
 			
