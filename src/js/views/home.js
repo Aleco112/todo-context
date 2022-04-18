@@ -80,6 +80,7 @@ export const Home = () => {
 							//check is input is empty
 							if (item!== "") {
 								actions.addItem([...store.list,{label:item,done:false}]);
+								setItem("")
 							}
 						}}
 						className="btn btn-outline-secondary"
