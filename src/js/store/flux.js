@@ -19,22 +19,42 @@ const getState = ({ getStore, getActions, setStore }) => {
 			
 			
 		},
-		addItem: (item)=>{
+		addItem: (list)=>{
 			fetch("https://assets.breatheco.de/apis/fake/todos/user/Aleco112",{
-					method :'GET',
+					method :'PUT',
 					redirect:'follow',
 					headers: {
 						"content-type": "application/json"
-
-
-
 					},
-					body:JSON.stringify([...getStore().list, {label: item,done:false}])
+					body:JSON.stringify(list)
 
 		})
-		.then(respose=>respose.status ===200 ? getActions().getData():"")
-		.catch(error=> console.log ("error,error"))
+		.then(response=>response.status ===200 ? getActions().getData():"")
+		.catch((error)=> console.log("error", error))
+
+	},
+	deleteTodo:(index)=> {
+		const rid = getStore().list.filter((item, i) => index !== i);
+		
+		fetch("https://assets.breatheco.de/apis/fake/todos/user/Aleco112",{
+				method :'PUT',
+				redirect:'follow',
+				headers: {
+					"content-type": "application/json"
+				},
+				body:JSON.stringify(rid)
+
+			})
+		
+		
+			.then((response) => {response.status === 200 ? setStore({list:rid}) : ""})
+			
+			.catch((error) => console.log("error", error));
+		
+
+
 	}
+
 }
 	};
 };

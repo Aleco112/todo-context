@@ -69,17 +69,17 @@ export const Home = () => {
 						value={item}
 						onKeyUp={(e) => {
 							if (e.key == "Enter" && item !== "") {
-								
-								action ("");
+								actions.addItem([...store.list,{label:item,done:false}]);
+
+								setItem("")
 							}
 						}}
 					/>
 					<button
 						onClick={() => {
 							//check is input is empty
-							if (action !== "") {
-								addTodo(store);
-								action("");
+							if (item!== "") {
+								actions.addItem([...store.list,{label:item,done:false}]);
 							}
 						}}
 						className="btn btn-outline-secondary"
@@ -90,15 +90,12 @@ export const Home = () => {
 				<ul>
 					{store.list.map((item, index) => {
 						return (
+						
 							<li className="newtodos" key={index}>
 								{item.label}
 								<button
 									onClick={() =>
-										deleteTodo(
-											item.filter((item, i) => {
-												return index !== i;
-											})
-										)
+									actions.deleteTodo(index)
 									}>
 									X
 								</button>
@@ -107,7 +104,7 @@ export const Home = () => {
 					})}
 				</ul>
 			</main>
-			<span>{item.length} item left</span>
+			<span>{store.list.length} item left</span>
 		</>
 	);
 };
